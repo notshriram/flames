@@ -8,11 +8,6 @@ const loadNames = () => {
   let name2 = document.getElementById("Name-2").value;
   document.getElementById("Name1big").innerHTML = name1.toUpperCase();
   document.getElementById("Name2big").innerHTML = name2.toUpperCase();
-
-  clearPreviousData();
-  cancelCommonLetters();
-  loadFlames();
-  doFlames();
 };
 
 const cancelCommonLetters = () => {
@@ -37,7 +32,7 @@ const cancelCommonLetters = () => {
       }
     }
   }
-  
+
   for (let i = 0; i < name1List.length; i++) {
     if (name1List[i] == "")
       name1Element.innerHTML += `<span class="text-decoration-line-through">${cut1List[i]}</span>`;
@@ -102,4 +97,12 @@ const clearPreviousData=() => {
   let flamesElement = document.getElementById("FLAMES");
   flamesElement.textContent = "";
   visited = [false, false, false, false, false, false];
+}
+
+const handleClick = () => {
+  clearPreviousData();
+  loadNames();
+  cancelCommonLetters();
+  loadFlames();
+  doFlames();
 }
