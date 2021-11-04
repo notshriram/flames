@@ -69,7 +69,15 @@ const cutLetters = (name1List, name2List, i) => {};
 
 
 const doFlames = () => {
-  if (count == 5) return;
+  if (count == 5)
+  {
+    index = visited.findIndex((element) => {
+      return element==false;
+    })
+    let spanElement = document.getElementById(`letter${index}`);
+    spanElement.classList.add("text-danger");
+    return;
+  } 
   else {
     let currentStep =0;
     while(currentStep<step){
