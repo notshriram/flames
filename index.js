@@ -8,7 +8,7 @@ const loadNames = () => {
 };
 let count = 0;
 let step = 0;
-let index = 0;
+let index = -1;
 const cancelCommonLetters = () => {
   let name1Element = document.getElementById("Name1big");
   let name2Element = document.getElementById("Name2big");
@@ -52,12 +52,12 @@ const cancelCommonLetters = () => {
   }
 
   let flamesElement = document.getElementById("FLAMES");
-  flamesElement.innerHTML += `<span id="letter1">F</span>`;
-  flamesElement.innerHTML += `<span id="letter2">L</span>`;
-  flamesElement.innerHTML += `<span id="letter3">A</span>`;
-  flamesElement.innerHTML += `<span id="letter4">M</span>`;
-  flamesElement.innerHTML += `<span id="letter5">E</span>`;
-  flamesElement.innerHTML += `<span id="letter6">S</span>`;
+  flamesElement.innerHTML += `<span id="letter0">F</span>`;
+  flamesElement.innerHTML += `<span id="letter1">L</span>`;
+  flamesElement.innerHTML += `<span id="letter2">A</span>`;
+  flamesElement.innerHTML += `<span id="letter3">M</span>`;
+  flamesElement.innerHTML += `<span id="letter4">E</span>`;
+  flamesElement.innerHTML += `<span id="letter5">S</span>`;
 
   doFlames();
   console.log(name1List);
@@ -67,19 +67,25 @@ const cancelCommonLetters = () => {
 
 const cutLetters = (name1List, name2List, i) => {};
 
+let visited = [false, false, false, false, false, false];
+
 const doFlames = () => {
   if (count == 5) return;
   else {
-    index = ((index + step - 1) % 6) + 1;
-    let spanElement = document.getElementById(`letter${index}`);
-    while (spanElement.classList.contains("text-decoration-line-through")) {
-      index++;
-      spanElement = document.getElementById(`letter${index}`);
+    let currentStep =0;
+    while(currentStep<step){
+      index = (index+1)%6;
+      if(visited[index]==false){
+        currentStep++;
+      }
+      console.log("index increased to" + index);
     }
+    let spanElement = document.getElementById(`letter${index}`);
     spanElement.classList.add("text-decoration-line-through");
-    //index++;
+    visited[index] = true;
+    console.log(visited);
     count++;
     console.log("count is " + count);
-    setTimeout(doFlames, 2000);
+    setTimeout(doFlames, 1000);
   }
 };
