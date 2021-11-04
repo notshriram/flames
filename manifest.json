@@ -1,0 +1,16 @@
+{
+    "name": "Flames Calculator",
+    "short_name": "Flames",
+    "theme_color": "#2196f3",
+    "background_color": "#ffffff",
+    "display": "minimal-ui",
+    "scope": "/",
+    "start_url": "/index.html",
+    "icons":[
+    {
+        "src":"flames.png",
+        "sizes":"512x512",
+        "type":"image/png"
+    }
+    ]
+  }
