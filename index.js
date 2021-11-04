@@ -1,24 +1,32 @@
+let count = 0;
+let step = 0;
+let index = -1;
+let visited = [false, false, false, false, false, false];
+
 const loadNames = () => {
   let name1 = document.getElementById("Name-1").value;
   let name2 = document.getElementById("Name-2").value;
   document.getElementById("Name1big").innerHTML = name1.toUpperCase();
   document.getElementById("Name2big").innerHTML = name2.toUpperCase();
 
+  clearPreviousData();
   cancelCommonLetters();
+  loadFlames();
+  doFlames();
 };
-let count = 0;
-let step = 0;
-let index = -1;
+
 const cancelCommonLetters = () => {
   let name1Element = document.getElementById("Name1big");
   let name2Element = document.getElementById("Name2big");
-  let name1List = name1Element.innerHTML.toUpperCase().split("");
-  let name2List = name2Element.innerHTML.toUpperCase().split("");
-  let cut1List = name1Element.innerHTML.toUpperCase().split("");
-  let cut2List = name2Element.innerHTML.toUpperCase().split("");
-
   name1Element.textContent = "";
   name2Element.textContent = "";
+
+  let name1List = document.getElementById("Name-1").value.toUpperCase().split("");
+  let name2List = document.getElementById("Name-2").value.toUpperCase().split("");
+  let cut1List = document.getElementById("Name-1").value.toUpperCase().split("");
+  let cut2List = document.getElementById("Name-2").value.toUpperCase().split("");
+
+
 
   for (let i = 0; i < name1List.length; i++) {
     for (let j = 0; j < name2List.length; j++) {
@@ -26,14 +34,10 @@ const cancelCommonLetters = () => {
       if (name2List[j] == name1List[i]) {
         name1List[i] = "";
         name2List[j] = "";
-        // name1Element.innerHTML += `<span class="text-decoration-line-through">${cut1List[i]}</span>`;
-        // name2Element.innerHTML += `<span class="text-decoration-line-through">${cut2List[i]}</span>`;
       }
     }
   }
-  name1Element.textContent = "";
-  name2Element.textContent = "";
-
+  
   for (let i = 0; i < name1List.length; i++) {
     if (name1List[i] == "")
       name1Element.innerHTML += `<span class="text-decoration-line-through">${cut1List[i]}</span>`;
@@ -51,6 +55,12 @@ const cancelCommonLetters = () => {
     }
   }
 
+  console.log(name1List);
+  console.log(name2List);
+  console.log("step is " + step);
+};
+
+const loadFlames = () => {
   let flamesElement = document.getElementById("FLAMES");
   flamesElement.innerHTML += `<span id="letter0">F</span>`;
   flamesElement.innerHTML += `<span id="letter1">L</span>`;
@@ -58,16 +68,10 @@ const cancelCommonLetters = () => {
   flamesElement.innerHTML += `<span id="letter3">M</span>`;
   flamesElement.innerHTML += `<span id="letter4">E</span>`;
   flamesElement.innerHTML += `<span id="letter5">S</span>`;
-
-  doFlames();
-  console.log(name1List);
-  console.log(name2List);
-  console.log("step is " + step);
-};
+}
 
 const cutLetters = (name1List, name2List, i) => {};
 
-let visited = [false, false, false, false, false, false];
 
 const doFlames = () => {
   if (count == 5) return;
@@ -89,3 +93,13 @@ const doFlames = () => {
     setTimeout(doFlames, 1000);
   }
 };
+
+
+const clearPreviousData=() => {
+  count=0;
+  step=0;
+  index=-1;
+  let flamesElement = document.getElementById("FLAMES");
+  flamesElement.textContent = "";
+  visited = [false, false, false, false, false, false];
+}
